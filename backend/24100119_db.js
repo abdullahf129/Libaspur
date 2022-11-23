@@ -55,16 +55,16 @@ function createTable(CreateQuerry)
 
 */
 
+var c1= "create table grp16_website.customer( cust_id varchar(200) Primary Key, password varchar(255), email_id varchar (200), name varchar(200), house_adress varchar(255),phone varchar(255),update_key int)"
 
-// var sql="CREATE TABLE grp16_website.Total_usage_kw (House_num INT, Date date, Houroftheday INT, Minutes INT, Usage_kw REAL,PRIMARY KEY (House_num,Date,Houroftheday,Minutes),INDEX date_hour_idx (date ASC, Houroftheday ASC)VISIBLE)";
-// var sql2="CREATE TABLE 24100119_PRECON.House_extra_info (House_num INT, Property_Area_sqft REAL, No_of_floors INT, Building_Year INT, Ceiling_Height_ft REAL, Ceiling_Insulation VARCHAR(255),PRIMARY KEY (House_num),FOREIGN KEY (House_num) REFERENCES House_member_info(House_num))";
-// var sql3="CREATE TABLE 24100119_PRECON.House_rooms(House_num INT,Total_No_of_Rooms INT, Bedrooms INT, Livingrooms INT, Drawingrooms INT, Kitchen INT,PRIMARY KEY (House_num),FOREIGN KEY (House_num) REFERENCES House_electrical_info(House_num))";
-// var sql4="CREATE TABLE 24100119_PRECON.House_electrical_info(House_num INT,Connection_Type VARCHAR(255), No_of_Electronic_Devices INT, No_of_ACs INT, No_of_Refrigerators INT, No_of_WashingMachines INT, No_of_Fans INT, No_of_Water_Dispensers INT, No_of_Water_Pumps INT, No_of_Electric_Heaters INT,No_of_Irons INT, No_of_Lighting_Devices INT, No_of_UPS INT,PRIMARY KEY (House_num),FOREIGN KEY (House_num) REFERENCES Total_usage_kw(House_num))";
-// var sql5="CREATE TABLE 24100119_PRECON.House_member_info (House_num INT, No_of_People INT, Adults_14_to_60 INT , Children_0_to_13 INT, Seniors INT, Permanent_Residents INT,  Temporary_Residents INT,PRIMARY KEY (House_num),FOREIGN KEY (House_num) REFERENCES House_rooms(House_num))";
-// var sql6="CREATE TABLE 24100119_PRECON.Weather_Data(Date date, Houroftheday INT, temp REAL, feelslike REAL, dew	REAL, humidity REAL, precip REAL, precipprob REAL, preciptype VARCHAR(255), snow	REAL, snowdepth	REAL, windgust	REAL, windspeed	REAL, winddir	INT, sealevelpressure REAL	, cloudcover	REAL, visibility	REAL, solarradiation REAL, solarenergy REAL, uvindex INT, severerisk REAL, conditions VARCHAR(255), icon VARCHAR(255), stations  VARCHAR(255),PRIMARY KEY (Date, Houroftheday),FOREIGN KEY (Date, Houroftheday) REFERENCES Total_usage_kw(Date, Houroftheday))";
-// var sql7="CREATE TABLE 24100119_PRECON.Daily_appliace_usage(House_num INT, Date date, Houroftheday INT, Minutes INT, AC_DR_kW REAL, UPS_kW REAL, LR_kW REAL, Kitchen_kW REAL, AC_Dr__kW REAL, AC_BR_kW REAL, Refrigerator_kW REAL, AC_LR_kW REAL, AC_kW REAL, AC_kW_1 REAL, AC_MBR_kW REAL, WP_kW REAL, AC_BR_kW_2 REAL, WD_kW REAL , AC_BR_kW_1 REAL, BR_kW REAL, Laundary_kW REAL, AC_BR3_kW REAL, AC_BR2_kW REAL, AC_BR1_kW REAL, Non_UPS_kW REAL, AC_Reg_kW REAL,PRIMARY KEY (House_num,Date,Houroftheday,Minutes),FOREIGN KEY (House_num,Date,Houroftheday,Minutes) REFERENCES Total_usage_kw(House_num,Date,Houroftheday,Minutes))";
-// var general="set global max_allowed_packet=1000000000;"
-
+var a1= "create table grp16_website.admin( admin_id varchar(200) Primary Key, password varchar(255))"
+var i1= "insert into grp16_website.admin values('abdullah','$2b$10$vyI6pWhW0NtWdvmfDLeIle3o.PiArrFMh/JHmUZk2tEr705fqibaG')"
+var s1= "create table grp16_website.product( product_id varchar(200) Primary Key, product_name varchar(255) not null, price varchar(255) not null, product_image varchar(255),category varchar(255),update_key int,active_bit int)"
+var inven= "create table grp16_website.inventory( product_id varchar(200) Primary Key, quantity varchar(255), category varchar(255),update_key int,active_bit int)"     
+var shop= "create table grp16_website.shopping_cart( cust_id varchar(200) Primary Key, product_id varchar(255), quantity varchar(255),total_cost double ,update_key int,active_bit int)"
+var curennt_order= "create table grp16_website.current_order( cust_id varchar(200) Primary Key, product_id varchar(255),order_id varchar(255),order_status varchar(255), quantity varchar(255) ,update_key int,active_bit int)"
+var order_history="create table grp16_website.order_history( cust_id varchar(200) Primary Key, product_id varchar(255),order_id varchar(255), quantity varchar(255),data varchar(255),total_cost double ,update_key int,active_bit int)"
+var password="create table grp16_website.password_reset( cust_id varchar(200) Primary Key, password varchar(255),sec_ques varchar(255),update_key int,active_bit int)"
 connectionString.connect( (error)=>
 {
     if(!error)
@@ -81,18 +81,25 @@ connectionString.connect( (error)=>
                 console.log("Database Created");
                 try{
                     //call create table here using await like done below here.
-                    // await createTable(sql)
-                    // await createTable(sql7)
-                    // await createTable(sql4)
-                    // await createTable(sql3)
-                    // await createTable(general)
-                    // await createTable(sql5)
-                    // await createTable(sql2)
-                    //await createTable(general)
+                    await createTable(c1)
+                    await createTable(a1)
+                    // await createTable(i1)
+                    // await createTable(s1)
+                    // await createTable(inven)
+                    // await createTable(shop)
+                    // await createTable(curennt_order)
+                    // await createTable(order_history)
+                    // await createTable(password)
+                    console.log("All tables created");
                 }
                 catch(err)
                 {
-                    console.log(err)
+                    // err=str
+                    var str=err.sqlMessage
+                    if (str.includes("already exists"))
+                        console.log("Nothing to worry about, table(s) already exist")
+                    else
+                        console.log(err)
                 }
                 
 
