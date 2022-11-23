@@ -2,20 +2,56 @@ import React, { useState } from 'react'
 import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import './signup.css'
 import axios from "axios";
+import { useEffect} from "react";
+import {useNavigate} from "react-router-dom"
+
+
 
 const Signupform = () => {
+  const navigate = useNavigate();
+
   const [username,setusername]=useState("");
   const [password,setpassword]=useState("");
 
-  const handlesubmit=async (e)=>{
-    e.preventDefault(); // doesnt allow submission when field is empty
-    axios.post('http://localhost:3001/post',{  // add post to address
-    User:{username},
-    pass:{password}
+  const [loginStatus, setLoginStatus] = useState("");
 
-    }).then(function (response){ console.log(response) })//calls post method API
+  const newregister=async (e)=>{
+    navigate('/register')
+  }
+
+  const handlelogincust=async (e)=>{
+    e.preventDefault(); // doesnt allow submission when field is empty
+    axios.post('http://localhost:3002/logincustomer',{  // add post to address
+    username: username,
+    password: password
+
+    }).then(function (response){console.log(response)})//calls post method API registration
 
   }
+
+  const handleloginadmin=async (e)=>{
+    e.preventDefault(); // doesnt allow submission when field is empty
+    axios.post('http://localhost:3002/loginadmin',{  // add post to address  //admin login
+    username: username,
+    password: password
+
+    }).then(function (response){ 
+      if (response.data.message) {
+        setLoginStatus(response.data.message);
+      } else {
+        setLoginStatus(response.data[0].username);
+      }
+    })//calls post method API registration
+
+  }
+
+  useEffect(() => {
+    axios.get("http://localhost:3002/login").then((response) => { //display current status
+      if (response.data.loggedIn == true) {
+        setLoginStatus(response.data.user[0].username);
+      }
+    });
+  }, []);
 
   return (
     <div>
@@ -52,17 +88,26 @@ const Signupform = () => {
       <p className="text-center fw-bold mx-3 mb-0">Or</p>
     </div>
 
-    <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='text'onChange={(e)=> setusername(e.target.value)} size="lg"/>
+    <MDBInput wrapperClass='mb-4' label='Username ' id='formControlLg' type='text'onChange={(e)=> setusername(e.target.value)} size="lg"/>
     <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password'onChange={(e)=> setpassword(e.target.value)} size="lg"/>
 
     <div className="d-flex justify-content-between mb-4">
       <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
+      <MDBBtn className="mb-0 px-5" size='lg' onClick={newregister}>Register Here </MDBBtn>
       <a href="!#">Forgot password?</a>
     </div>
 
     <div className='text-center text-md-start mt-4 pt-2'>
-      <MDBBtn className="mb-0 px-5" size='lg' onClick={handlesubmit}>Signup</MDBBtn>
-      <p className="small fw-bold mt-2 pt-1 mb-2">Don't have an account? <a href="#!" className="link-danger">Register</a></p>
+      <MDBBtn className="mb-0 px-5" size='lg' onClick={handlelogincust}>Sign in </MDBBtn>
+    </div>
+
+
+    <div className='text-center text-md-start mt-4 pt-2'>
+      <MDBBtn className="mb-0 px-5" size='lg' onClick={handleloginadmin}>Sign in (Admin)</MDBBtn>
+    </div>
+  
+    <div className='text-center text-md-start mt-4 pt-2'>
+    <h1>{loginStatus}</h1>
     </div>
 
   </MDBCol>
