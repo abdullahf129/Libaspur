@@ -12,7 +12,46 @@ import {
   }
   from 'mdb-react-ui-kit';
 
-const registerform = () => {
+import axios from "axios";
+import {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom"
+
+const Registerform = () => {
+
+    const navigate = useNavigate();
+
+    const moveback=async (e)=>{
+        navigate('/')
+      }
+
+    const [username,setusername]=useState("");
+    const [password,setpassword]=useState("");
+    const [email,setmail]=useState("");
+    const [name,setname]=useState("");
+    const [address,setaddress]=useState("");
+    const [number,setnumber]=useState("");
+       
+    const [singupStatus, setsignupStatus] = useState("");
+
+    const newregister=async (e)=>{
+        e.preventDefault(); // doesnt allow submission when field is empty
+        axios.post('http://localhost:3002/register',{  // add post to address
+        username: username,
+        password: password,
+        email:email,
+        name: name,
+        address: address,
+        number: number
+        }).then(function (response){console.log(response)})        
+      }
+
+      useEffect(() => {
+        axios.get("http://localhost:3002/register").then((response) => { //display current status
+            setsignupStatus(response.data.user[0].message);
+        });
+      }, []);
+    
+
   return (
     <div>
 <MDBContainer fluid className='p-4 background-radial-gradient overflow-hidden'>
@@ -23,14 +62,11 @@ const registerform = () => {
 
     <h1 className="my-5 display-3 fw-bold ls-tight px-3" style={{color: 'hsl(218, 81%, 95%)'}}>
       The best offer <br />
-      <span style={{color: 'hsl(218, 81%, 75%)'}}>for your business</span>
+      <span style={{color: 'hsl(218, 81%, 75%)'}}>Libaspur</span>
     </h1>
 
     <p className='px-3' style={{color: 'hsl(218, 81%, 85%)'}}>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      Eveniet, itaque accusantium odio, soluta, corrupti aliquam
-      quibusdam tempora at cupiditate quis eum maiores libero
-      veritatis? Dicta facilis sint aliquid ipsum atque?
+        THE ONE KIND OF PLACE TO BUY YOUR ALL KIND OF CLOTHES.
     </p>
 
   </MDBCol>
@@ -43,28 +79,29 @@ const registerform = () => {
     <MDBCard className='my-5 bg-glass'>
       <MDBCardBody className='p-5'>
 
-        <MDBRow>
-          <MDBCol col='6'>
-            <MDBInput wrapperClass='mb-4' label='First name' id='form1' type='text'/>
-          </MDBCol>
 
           <MDBCol col='6'>
-            <MDBInput wrapperClass='mb-4' label='Last name' id='form2' type='text'/>
+            <MDBInput wrapperClass='mb-4' label='Username' id='formControlLg' type='text'onChange={(e)=> setusername(e.target.value)}/>
           </MDBCol>
-        </MDBRow>
 
-        <MDBInput wrapperClass='mb-4' label='Email' id='form3' type='email'/>
-        <MDBInput wrapperClass='mb-4' label='Password' id='form4' type='password'/>
 
-        <div className='d-flex justify-content-center mb-4'>
-          <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
+        <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password'onChange={(e)=> setpassword(e.target.value)}/>
+        <MDBInput wrapperClass='mb-4' label='Email' id='formControlLg' type='email'onChange={(e)=> setmail(e.target.value)}/>
+        <MDBInput wrapperClass='mb-4' label='First Name' id='formControlLg' type='text'onChange={(e)=> setname(e.target.value)}/>
+        <MDBInput wrapperClass='mb-4' label='House Address' id='formControlLg' type='text'onChange={(e)=> setaddress(e.target.value)}/>
+        <MDBInput wrapperClass='mb-4' label='Phone number' id='formControlLg' type='text'onChange={(e)=> setnumber(e.target.value)}/>
+
+        <MDBBtn className='w-100 mb-4' size='md'onClick={newregister}>sign up</MDBBtn>
+        <MDBBtn className='w-100 mb-4' size='md'onClick={moveback}>Back to login</MDBBtn>
+
+
+        <div className='text-center text-md-start mt-4 pt-2'>
+        <h1>{singupStatus}</h1>
         </div>
-
-        <MDBBtn className='w-100 mb-4' size='md'>sign up</MDBBtn>
 
         <div className="text-center">
 
-          <p>or sign up with:</p>
+          <p>Contact us on: </p>
 
           <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
             <MDBIcon fab icon='facebook-f' size="sm"/>
@@ -78,9 +115,6 @@ const registerform = () => {
             <MDBIcon fab icon='google' size="sm"/>
           </MDBBtn>
 
-          <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-            <MDBIcon fab icon='github' size="sm"/>
-          </MDBBtn>
 
         </div>
 
@@ -98,4 +132,4 @@ const registerform = () => {
   )
 }
 
-export default registerform
+export default Registerform

@@ -19,13 +19,24 @@ const Signupform = () => {
     navigate('/register')
   }
 
+  const forgotpassword=async(e)=>{
+
+    
+  }
+
   const handlelogincust=async (e)=>{
     e.preventDefault(); // doesnt allow submission when field is empty
     axios.post('http://localhost:3002/logincustomer',{  // add post to address
     username: username,
     password: password
 
-    }).then(function (response){console.log(response)})//calls post method API registration
+  }).then(function (response){ 
+    if (response.data.message) {
+      setLoginStatus(response.data.message);
+    } else {
+      setLoginStatus(response.data[0].username);
+    }
+  })//calls post method API registration
 
   }
 
@@ -68,7 +79,7 @@ const Signupform = () => {
 
     <div className="d-flex flex-row align-items-center justify-content-center">
 
-      <p className="lead fw-normal mb-0 me-3">Sign in with</p>
+      <p className="lead fw-normal mb-0 me-3">Contact us here</p>
 
       <MDBBtn floating size='md' tag='a' className='me-2'>
         <MDBIcon fab icon='facebook-f' />
@@ -79,7 +90,7 @@ const Signupform = () => {
       </MDBBtn>
 
       <MDBBtn floating size='md' tag='a'  className='me-2'>
-        <MDBIcon fab icon='linkedin-in' />
+       <MDBIcon fab icon='google' size="sm"/>
       </MDBBtn>
 
     </div>
@@ -94,7 +105,7 @@ const Signupform = () => {
     <div className="d-flex justify-content-between mb-4">
       <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
       <MDBBtn className="mb-0 px-5" size='lg' onClick={newregister}>Register Here </MDBBtn>
-      <a href="!#">Forgot password?</a>
+      <MDBBtn className="mb-0 px-5" size='lg' onClick={forgotpassword}>Forgot password </MDBBtn>
     </div>
 
     <div className='text-center text-md-start mt-4 pt-2'>

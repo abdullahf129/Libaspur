@@ -44,6 +44,11 @@ const db = mysql.createConnection({
 app.post("/register", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
+  const email=req.body.email
+  const name=req.body.name
+  const address=req.body.address
+  const number=req.body.number
+  const update_key=0
 
   bcrypt.hash(password, saltRounds, (err, hash) => {
     if (err) {
@@ -51,10 +56,15 @@ app.post("/register", (req, res) => {
     }
 
     db.query(
-      "INSERT INTO store_admin (ID, password) VALUES (?,?)",
-      [username, hash],
+      "INSERT INTO customer (cust_id, password,email_id,name,house_adress,phone,update_key) VALUES (?,?,?,?,?,?,?)",
+      [username, hash,email,name,address,number,update_key],
       (err, result) => {
+        if (err){
         console.log(err);
+        res.send({message:"Registration unsuccessful, an error occured"})
+
+        }
+        res.send({message:"Registered successfully"})
       }
     );
   });
@@ -63,7 +73,8 @@ app.post("/register", (req, res) => {
 app.get("/loginadmin", (req, res) => {
   if (req.session.user) {
     res.send({ loggedIn: true, user: req.session.user });
-  } else {
+  } 
+  else {
     res.send({ loggedIn: false });
   }
 });
