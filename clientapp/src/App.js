@@ -7,7 +7,8 @@ import {
   Link,
 } from "react-router-dom";
 import Signupform from './pages/signupform/Signupform';
-import Registerform from './pages/registerform/Registerform'
+import Registerform from './pages/registerform/Registerform';
+import Admin from './pages/admin/Admin';
 
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
     <Routes>
     <Route path="/" element={<Signupform/>} />
     <Route path="/register" element={<Registerform />} />
+    <Route path="/admin" element={<Admin />} />
+    <Route path="/addprod" element={<Addprod/>}
     </Routes>
     </BrowserRouter>
     

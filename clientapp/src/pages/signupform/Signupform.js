@@ -49,6 +49,8 @@ const Signupform = () => {
     }).then(function (response){ 
       if (response.data.message) {
         setLoginStatus(response.data.message);
+        navigate('/admin')
+        
       } else {
         setLoginStatus(response.data[0].username);
       }
