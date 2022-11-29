@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-    router.get("/adminpanel",(req,res)=>{
+    router.get("/admin",(req,res)=>{
     
     
         res.send("Hello admin");

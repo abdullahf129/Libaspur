@@ -9,6 +9,7 @@ import {
 import Signupform from './pages/signupform/Signupform';
 import Registerform from './pages/registerform/Registerform';
 import Admin from './pages/admin/Admin';
+import Addprod from './pages/addproduct/Addprod';
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     <Route path="/" element={<Signupform/>} />
     <Route path="/register" element={<Registerform />} />
     <Route path="/admin" element={<Admin />} />
-    <Route path="/addprod" element={<Addprod/>}
+    <Route path="/addprod" element={<Addprod />} />
     </Routes>
     </BrowserRouter>
     
