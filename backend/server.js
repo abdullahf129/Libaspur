@@ -216,9 +216,42 @@ app.post("/removeprod", (req, res) => {
       }
     );
 
-    
+}
 
+);
 
+app.post("/modprod", (req, res) => {
+    const productname = req.body.prodname;
+    const price = req.body.prodprice;
+    const stock = req.body.prodstock;
+    const productcategory = req.body.prodcat
+    const product_id = req.body.prodid
+    const productimage = req.body.prodimg
+    const update_key = 1
+    const active_bit = 1
+
+    db.query(
+        "UPDATE products SET product_name=? , price=? , product_image=? ,category=?,update_key=? ,active_bit=? WHERE product_id=?",
+        [productname, price, productimage, productcategory, update_key, active_bit, product_id],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({ message: "Product Modification unsuccessful, an error occured" })
+            }
+            res.send({ message: "Product modified successfully" })
+        }
+    );
+    db.query(
+        "UPDATE inventory SET quantity=?,category=?,update_key=?,active_bit=? WHERE product_id=?",
+        [stock, productcategory, update_key, active_bit, product_id],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({ message: "Product modification unsuccessful, an error occured" })
+            }
+            res.send({ message: "Product modified successfully" })
+        }
+    );
 }
 
 );

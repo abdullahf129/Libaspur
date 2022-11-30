@@ -51,7 +51,7 @@ const Addprod = () => {
           <MDBInput wrapperClass='mb-4' label='Product Image' id='form3' type='text'onChange={(e)=> setprodimg(e.target.value)}/>
 
 
-    
+
           <MDBBtn className="mb-0 px-5" size='lg' onClick={addprod}>Add </MDBBtn>
     
 

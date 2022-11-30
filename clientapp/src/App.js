@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -11,6 +12,7 @@ import Registerform from './pages/registerform/Registerform';
 import Admin from './pages/admin/Admin';
 import Addprod from './pages/addproduct/Addprod';
 import Removeprod from './pages/removeprod/Removeprod';
+import Modprod from './pages/modifyprod/Modprod';
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
     <Route path="/admin" element={<Admin />} />
     <Route path="/addprod" element={<Addprod />} />
     <Route path="/removeprod" element={<Removeprod />} />
+    <Route path="/modprod" element={<Modprod />} />
     </Routes>
     </BrowserRouter>
     
