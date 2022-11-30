@@ -29,15 +29,22 @@ const Signupform = () => {
     axios.post('http://localhost:3002/logincustomer',{  // add post to address
     username: username,
     password: password
+  } 
+  ).then(function (response){ 
 
-  }).then(function (response){ 
+    console.log(response);
+
+
     if (response.data.message) {
       setLoginStatus(response.data.message);
+      navigate('/gallery')        //////////////////////////////////
+
     } else {
       setLoginStatus(response.data[0].username);
+      navigate('/gallery')         ///////////////////////////////
     }
   })//calls post method API registration
-
+    navigate('/gallery')
   }
 
   const handleloginadmin=async (e)=>{
@@ -52,10 +59,10 @@ const Signupform = () => {
         navigate('/admin')
         
       } else {
-        setLoginStatus(response.data[0].username);
+        setLoginStatus(response.data[0].username);           ///////////////////////////
       }
     })//calls post method API registration
-
+      navigate('/gallery')   //naviagagting to gallery temporarily   //////////////////////////
   }
 
   useEffect(() => {
@@ -112,11 +119,13 @@ const Signupform = () => {
 
     <div className='text-center text-md-start mt-4 pt-2'>
       <MDBBtn className="mb-0 px-5" size='lg' onClick={handlelogincust}>Sign in </MDBBtn>
+        
     </div>
 
 
     <div className='text-center text-md-start mt-4 pt-2'>
       <MDBBtn className="mb-0 px-5" size='lg' onClick={handleloginadmin}>Sign in (Admin)</MDBBtn>
+      
     </div>
   
     <div className='text-center text-md-start mt-4 pt-2'>
