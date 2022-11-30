@@ -159,8 +159,8 @@ app.post("/addprod", (req, res) => {
   const active_bit=1
 
     db.query(
-        "INSERT INTO products (product_id, product_name , price , product_image ,category,update_key ,active_bit) VALUES (?,?,?,?,?,?,?)",
-        [product_id, productname,price, productimage, productcategory, update_key, active_bit],
+        "INSERT INTO products (product_id, product_name , price , product_image ,category,update_key ,active_bit,prod_image) VALUES (?,?,?,?,?,?,?,?)",
+        [product_id, productname,price, productimage, productcategory, update_key, active_bit,productimage],
         (err, result) => {
           if (err){
           console.log(err);
