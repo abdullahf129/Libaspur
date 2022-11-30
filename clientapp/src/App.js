@@ -13,7 +13,7 @@ import Admin from './pages/admin/Admin';
 import Addprod from './pages/addproduct/Addprod';
 import Removeprod from './pages/removeprod/Removeprod';
 import Modprod from './pages/modifyprod/Modprod';
-
+import Shopping from './pages/Cart/Shopping_cart';
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
     <Route path="/addprod" element={<Addprod />} />
     <Route path="/removeprod" element={<Removeprod />} />
     <Route path="/modprod" element={<Modprod />} />
+    <Route path="/cart" element={<Shopping />} />
     </Routes>
     </BrowserRouter>
     
