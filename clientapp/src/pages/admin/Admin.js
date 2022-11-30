@@ -22,7 +22,7 @@ const Admin_pg = () => {
     navigate('/addprod')
   }
 
-  const addcar=async (e)=>{
+  const addcat=async (e)=>{
     navigate('/register')
   }
 
