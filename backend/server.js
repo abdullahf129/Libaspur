@@ -172,6 +172,34 @@ app.post("/addprod", (req, res) => {
     
 
 }
+
+
+);
+
+
+app.post("/removeprod", (req, res) => {
+
+  const product_id=req.body.prodid
+  const update_key=0
+  const active_bit=0
+
+    db.query(
+        "UPDATE products SET update_key=?, active_bit=? WHERE product_id=?",
+        [update_key, active_bit, product_id],
+        (err, result) => {
+          if (err){
+          console.log(err);
+          res.send({message:"Product removal unsuccessful, an error occured"})
+          }
+          res.send({message:"Product removed successfully"})
+        }
+    );
+
+    
+
+
+}
+
 );
 
 app.listen(3002, () => {

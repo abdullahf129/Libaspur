@@ -10,6 +10,7 @@ import Signupform from './pages/signupform/Signupform';
 import Registerform from './pages/registerform/Registerform';
 import Admin from './pages/admin/Admin';
 import Addprod from './pages/addproduct/Addprod';
+import Removeprod from './pages/removeprod/Removeprod';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     <Route path="/register" element={<Registerform />} />
     <Route path="/admin" element={<Admin />} />
     <Route path="/addprod" element={<Addprod />} />
+    <Route path="/removeprod" element={<Removeprod />} />
     </Routes>
     </BrowserRouter>
     
