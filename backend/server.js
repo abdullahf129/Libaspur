@@ -151,6 +151,7 @@ app.post("/logincustomer", (req, res) => {
 app.post("/addprod", (req, res) => {
   const productname = req.body.prodname;
   const price = req.body.prodprice;
+  const stock = req.body.prodstock;
   const productcategory=req.body.prodcat
   const product_id=req.body.prodid
   const productimage=req.body.prodimg
@@ -168,8 +169,17 @@ app.post("/addprod", (req, res) => {
           res.send({message:"Product added successfully"})
         }
     );
-
-    
+    db.query(
+      "INSERT INTO inventory (product_id, quantity,category,update_key,active_bit) VALUES (?,?,?,?,?)",
+      [product_id, stock,productcategory,update_key,active_bit],
+      (err, result) => {
+        if (err){
+        console.log(err);
+        res.send({message:"Product addition unsuccessful, an error occured"})
+        }
+        res.send({message:"Product added successfully"})
+      }
+  );
 
 }
 
@@ -193,6 +203,17 @@ app.post("/removeprod", (req, res) => {
           }
           res.send({message:"Product removed successfully"})
         }
+    );
+    db.query(
+      "UPDATE inventory SET update_key=?, active_bit=? WHERE product_id=?",
+      [update_key, active_bit, product_id],
+      (err, result) => {
+        if (err){
+        console.log(err);
+        res.send({message:"Product removal unsuccessful, an error occured"})
+        }
+        res.send({message:"Product removed successfully"})
+      }
     );
 
     
