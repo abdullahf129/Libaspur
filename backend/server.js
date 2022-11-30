@@ -256,6 +256,88 @@ app.post("/modprod", (req, res) => {
 
 );
 
+app.get("/checkout", (req, res) => {
+
+  res.send("Done!");
+  // if (req.session.user) {
+  //   res.send({ loggedIn: true, user: req.session.user });
+  // } else {
+  //   res.send({ loggedIn: false });
+  // }
+});
+
+
+//( cust_id varchar(200) Primary Key, product_id varchar(255),order_id varchar(255), quantity varchar(255),data varchar(255),total_cost double ,update_key int,active_bit int)"
+app.post("/checkout", (req, res) => {
+  // const username = req.body.username;   //same variable names which we'll use in front end so it fetches them from front end
+  // const productid = req.body.productid;
+  // const orderid=req.body.orderid
+  // const quantity=req.body.quantity
+  // const data=req.body.data  //actually means date, but spelling mistake in schema table so followed it
+  // const totalcost=req.body.totalcost
+  // const update_key=0
+  // const active_bit=1
+
+  //appending order history
+
+  db.query(
+    `SELECT * FROM shopping_cart WHERE shoppingcart_id=${shopping_cart}`, 
+    (err, result) => {
+      
+    console.log(result)
+
+
+  
+
+    db.query(
+      "INSERT INTO order_history (cust_id, shoppingcart_id, product_id, order_id, quantity, NOW(), total_cost,update_key, active_bit) VALUES (?,?,?,?,?,?,?,?)",
+      [result.cust_id, result.shoppingcart_id, result.product_id, orderid, result.quantity, result.data, result.total_cost, result.update_key, result.active_bit],
+      (err, result) => {
+        if (err){
+        console.log(err);
+        res.send({message:"Order could not be placed"})
+
+        }
+        res.send({message:"Order has been shipped"})
+      }
+    );
+      }  );    
+  //subtracting from inventory
+  //accessing quantity of product in inventory and doing minus 1
+  const newquantity = 0;
+  db.query(
+    "SELECT quantity FROM inventory WHERE product_id = ?;",
+    result.product_id,
+    (err, result) => {
+      if (err) {
+        res.send({ err: err });
+      }
+      newquantity = result-1;
+    }
+    
+  );
+  //updating old value in database to new one
+  db.query(
+    "UPDATE inventory SET quantity = ? WHERE product_id = ?;" 
+    [newquantity, result.product_id]
+  );
+
+  //making shopping cart inactive since it is now empty because order has been shipped
+  
+  db.query(
+    "SELECT active_bit FROM shopping_cart WHERE shoppingcart_id = ?;",
+    result.shoppingcart_id,
+    (err, result) => {
+      if (err) {
+          res.send({ err: err });
+        }
+        result.active_bit = 0
+      }
+      
+    );  
+    
+});
+
 app.listen(3002, () => {
   console.log("running server");
 });
