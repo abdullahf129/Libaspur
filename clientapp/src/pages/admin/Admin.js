@@ -35,11 +35,11 @@ const Admin_pg = () => {
   }
 
   const remprod=async (e)=>{
-    navigate('/register')
+    navigate('/removeprod')
   }
 
   const modify=async (e)=>{
-    navigate('/register')
+    navigate('/modprod')
   }
 
 
