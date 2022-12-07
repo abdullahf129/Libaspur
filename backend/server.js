@@ -338,6 +338,13 @@ app.post("/checkout", (req, res) => {
     
 });
 
+app.get('/stock', (req, res) => {
+  db.query("SELECT product_id, quantity FROM inventory;", (err, results, fields) => {
+    if(err) throw err;
+    res.send(results);
+  });
+});
+
 app.listen(3002, () => {
   console.log("running server");
 });
