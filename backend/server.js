@@ -247,6 +247,32 @@ app.post("/modprod", (req, res) => {
 
 );
 
+
+app.post("/addcat", (req, res) => {
+    const categoryname = req.body.category;
+    const update_key = 0
+    const active_bit = 1
+
+    db.query(
+        "INSERT INTO category ( category_name, update_key, active_bit) VALUES (?,?,?)",
+        [categoryname, update_key, active_bit],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                res.send({ message: "Category addition unsuccessful, an error occured" })
+            }
+            res.send({ message: "Category added successfully" })
+        }
+    );
+}
+
+);
+
+
+
+
+
+
 app.get("/checkout", (req, res) => {
 
   res.send("Done!");

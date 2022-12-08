@@ -23,7 +23,7 @@ const Admin_pg = () => {
   }
 
   const addcat=async (e)=>{
-    navigate('/register')
+    navigate('/addcat')
   }
 
   const stock=async (e)=>{
@@ -41,6 +41,7 @@ const Admin_pg = () => {
   const modify=async (e)=>{
     navigate('/modprod')
   }
+
 
 
 

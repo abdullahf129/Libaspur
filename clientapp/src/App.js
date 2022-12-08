@@ -16,11 +16,11 @@ import Gallery from './pages/gallery/gallery/Gallery'
 import Images from './pages/gallery/gallery/images'
 import Forgotpassword from './pages/forgotpassword/Forgotpassword'
 import Admin from './pages/admin/Admin'
-import Addprod from './pages/admin/addprod/Addprod'
-import Removeprod from './pages/admin/removeprod/Removeprod'
-import Modprod from './pages/admin/modifyprod/Modprod'
-// import Addcat from './pages/admin/addcat/Addcat'
-import Stock from './pages/admin/stock/Stock'
+import Addprod from './pages/addprod/Addprod'
+import Removeprod from './pages/removeprod/Removeprod'
+import Modprod from './pages/modifyprod/Modprod'
+import Addcat from './pages/admin/addcat/Addcat'
+import Stock from './pages/stock/Stock'
 // import Sales from './pages/admin/sales/Sales'
 import Cart from './pages/cart/Shopping_cart'
 
@@ -39,7 +39,7 @@ function App() {
     <Route path="/addprod" element={<Addprod/>} />
     <Route path="/removeprod" element={<Removeprod/>} />
     <Route path="/modprod" element={<Modprod/>} />
-    {/* <Route path="/addcat" element={<Addcat/>} /> */}
+    <Route path="/addcat" element={<Addcat/>} />
     <Route path="/stock" element={<Stock/>} />
     <Route path="/cart" element={<Cart/>} />
     {/* <Route path="/sales" element={<Admin/>} /> */}
