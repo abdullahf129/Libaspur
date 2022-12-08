@@ -1,19 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
+import { useState } from 'react';
+
 import {
   BrowserRouter,
   Routes,
   Route,
   Link,
-} from "react-router-dom";
+}
+ from "react-router-dom";
 import Signupform from './pages/signupform/Signupform';
-import Registerform from './pages/registerform/Registerform';
-import Admin from './pages/admin/Admin';
-import Addprod from './pages/addproduct/Addprod';
-import Removeprod from './pages/removeprod/Removeprod';
-import Modprod from './pages/modifyprod/Modprod';
-import Shopping from './pages/Cart/Shopping_cart';
+import Registerform from './pages/registerform/Registerform'
+import Gallery from './pages/gallery/gallery/Gallery'
+import Images from './pages/gallery/gallery/images'
+import Forgotpassword from './pages/forgotpassword/Forgotpassword'
+
 
 function App() {
   return (
@@ -22,11 +24,11 @@ function App() {
     <Routes>
     <Route path="/" element={<Signupform/>} />
     <Route path="/register" element={<Registerform />} />
-    <Route path="/admin" element={<Admin />} />
-    <Route path="/addprod" element={<Addprod />} />
-    <Route path="/removeprod" element={<Removeprod />} />
-    <Route path="/modprod" element={<Modprod />} />
-    <Route path="/cart" element={<Shopping />} />
+    <Route path="/gallery" element={<Gallery/>} />
+    <Route path="/forgotpassword" element={<Forgotpassword/>} />
+    <Route path="/images" element={<Images/>} />
+    <Route path="/homepage" element={<Gallery/>} />
+    {/* <Route path="/useState" element={<useState/>} /> */}
     </Routes>
     </BrowserRouter>
     
