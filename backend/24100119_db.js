@@ -46,8 +46,7 @@ function createTable(CreateQuerry) {
 
 */
 
-var c1 =
-  "create table grp16_website.customer( cust_id varchar(200) Primary Key, password varchar(255), email_id varchar (200), name varchar(200), house_adress varchar(255),phone varchar(255),update_key int)";
+var c1 ="create table grp16_website.customer( cust_id varchar(200) Primary Key, password varchar(255), email_id varchar (200), name varchar(200), house_adress varchar(255),phone varchar(255),update_key int)";
 
 var a1= "create table grp16_website.admin( admin_id varchar(200) Primary Key, password varchar(255))"
 var i1= "insert into grp16_website.admin values('abdullah','$2b$10$vyI6pWhW0NtWdvmfDLeIle3o.PiArrFMh/JHmUZk2tEr705fqibaG')"
@@ -93,6 +92,12 @@ connectionString.connect( (error)=>
                     else
                         console.log(err)
                 }
+            }
+        })
+    }
+})
+    
+
 
 
   var shop =
