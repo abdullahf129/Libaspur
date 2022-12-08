@@ -15,6 +15,7 @@ import Registerform from './pages/registerform/Registerform'
 import Gallery from './pages/gallery/gallery/Gallery'
 import Images from './pages/gallery/gallery/images'
 import Forgotpassword from './pages/forgotpassword/Forgotpassword'
+import Admin from './pages/admin/Admin'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
     <Route path="/forgotpassword" element={<Forgotpassword/>} />
     <Route path="/images" element={<Images/>} />
     <Route path="/homepage" element={<Gallery/>} />
+    <Route path="/admin" element={<Admin/>} />
     {/* <Route path="/useState" element={<useState/>} /> */}
     </Routes>
     </BrowserRouter>
