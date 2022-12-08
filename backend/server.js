@@ -301,40 +301,41 @@ app.post("/checkout", (req, res) => {
         res.send({message:"Order has been shipped"})
       }
     );
-      }  );    
-  //subtracting from inventory
-  //accessing quantity of product in inventory and doing minus 1
-  const newquantity = 0;
-  db.query(
-    "SELECT quantity FROM inventory WHERE product_id = ?;",
-    result.product_id,
-    (err, result) => {
-      if (err) {
-        res.send({ err: err });
-      }
-      newquantity = result-1;
-    }
-    
-  );
-  //updating old value in database to new one
-  db.query(
-    "UPDATE inventory SET quantity = ? WHERE product_id = ?;" 
-    [newquantity, result.product_id]
-  );
-
-  //making shopping cart inactive since it is now empty because order has been shipped
-  
-  db.query(
-    "SELECT active_bit FROM shopping_cart WHERE shoppingcart_id = ?;",
-    result.shoppingcart_id,
-    (err, result) => {
-      if (err) {
+          
+    //subtracting from inventory
+    //accessing quantity of product in inventory and doing minus 1
+    const newquantity = 0;
+    db.query(
+      "SELECT quantity FROM inventory WHERE product_id = ?;",
+      result.product_id,
+      (err, result) => {
+        if (err) {
           res.send({ err: err });
         }
-        result.active_bit = 0
+        newquantity = result-1;
       }
       
-    );  
+    );
+    //updating old value in database to new one
+    db.query(
+      "UPDATE inventory SET quantity = ? WHERE product_id = ?;" 
+      [newquantity, result.product_id]
+    );
+
+   //making shopping cart inactive since it is now empty because order has been shipped
+  
+    db.query(
+      "SELECT active_bit FROM shopping_cart WHERE shoppingcart_id = ?;",
+      result.shoppingcart_id,
+      (err, result) => {
+        if (err) {
+            res.send({ err: err });
+          }
+          result.active_bit = 0
+        }
+        
+      );  
+      });   
     
 });
 
@@ -344,6 +345,49 @@ app.get('/stock', (req, res) => {
     res.send(results);
   });
 });
+
+//Add to cart function
+app.post("/addtocart", (req, res) => {
+  db.query(
+    `SELECT * FROM inventory WHERE product_id = $(inventory)`,
+    (err, result) => {
+    {
+      if (err){
+        console.log(err);
+      }
+      }
+db.query(
+  "INSERT INTO cart (product_id, quantity, customer_id, update_key, active_bit) VALUES (?,?,?,?,?)",
+  [product_id, quantity, customer_id, update_key, active_bit],
+  (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send({ message: "Product addition unsuccessful, an error occured" });
+    }
+    res.send({ message: "Product added successfully" });
+  }
+)})});
+
+//Send cart data to cart page
+app.post("/cart_gallery", (req, res) => {
+  try {
+    db.query("select product_id from cart", (err, result) => {
+      if (err) {
+        console.log({ err: err });
+      }
+      // console.log(result);
+      var arr = [];
+      for (var i = 0; i < result.length; i++) {
+        arr.push(result[i]);
+      }
+      res.send({ result: arr });
+    });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
+
 
 app.listen(3002, () => {
   console.log("running server");
