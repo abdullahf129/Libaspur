@@ -22,8 +22,8 @@ const Admin_pg = () => {
     navigate('/addprod')
   }
 
-  const addcar=async (e)=>{
-    navigate('/register')
+  const addcat=async (e)=>{
+    navigate('/addcat')
   }
 
   const stock=async (e)=>{
@@ -35,12 +35,13 @@ const Admin_pg = () => {
   }
 
   const remprod=async (e)=>{
-    navigate('/register')
+    navigate('/removeprod')
   }
 
   const modify=async (e)=>{
-    navigate('/register')
+    navigate('/modprod')
   }
+
 
 
 
