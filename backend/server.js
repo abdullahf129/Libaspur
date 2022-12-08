@@ -90,6 +90,7 @@ app.post("/loginadmin", (req, res) => {
       if (err) {
         res.send({ err: err });
       }
+      
 
       if (result.length > 0) {
         bcrypt.compare(password, result[0].password, (error, response) => {
@@ -108,6 +109,49 @@ app.post("/loginadmin", (req, res) => {
     }
   );
 });
+
+app.post("/changepassword", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const newpassword=req.body.newpassword
+
+  db.query(
+    "SELECT * FROM customer WHERE email_id = ?;",
+    username,
+    (err, result) => {
+      if (err) {
+        res.send({ err: err });
+      }
+      
+    bcrypt.hash(newpassword, saltRounds, (err, hash) => {
+    if (err) {
+      console.log(err);
+    }
+
+      if (result.length > 0) {
+        db.query(
+          "UPDATE customer SET password= ? WHERE email_id= ?;",
+          [hash,username],
+          (err, result) => {
+            if (err){
+            console.log("error occured");      
+            }
+            else {
+              console.log('notjing')
+            }
+          }
+        )
+          res.send({message:"Successfully changes"})
+
+      }
+       else {
+        res.send({ message: "User doesn't exist" });
+      }
+    }
+  );
+});
+});
+
 
 
 app.get("/logincustomer", (req, res) => {
@@ -147,72 +191,19 @@ app.post("/logincustomer", (req, res) => {
   );
 });
 
-
-app.post("/addprod", (req, res) => {
-  const productname = req.body.prodname;
-  const price = req.body.prodprice;
-  const stock = req.body.prodstock;
-  const productcategory=req.body.prodcat
-  const product_id=req.body.prodid
-  const productimage=req.body.prodimg
-  const update_key=0
-  const active_bit=1
+app.post("/insertreview", (req, res) => {
+  const username = req.body.username;
+  const sentence = req.body.sentence;
 
     db.query(
-        "INSERT INTO products (product_id, product_name , price , product_image ,category,update_key ,active_bit,prod_image) VALUES (?,?,?,?,?,?,?,?)",
-        [product_id, productname,price, productimage, productcategory, update_key, active_bit,productimage],
-        (err, result) => {
-          if (err){
-          console.log(err);
-          res.send({message:"Product addition unsuccessful, an error occured"})
-          }
-          res.send({message:"Product added successfully"})
-        }
-    );
-    db.query(
-      "INSERT INTO inventory (product_id, quantity,category,update_key,active_bit) VALUES (?,?,?,?,?)",
-      [product_id, stock,productcategory,update_key,active_bit],
+      "INSERT INTO review (user_id, statement) VALUES (?,?)",
+      [username, sentence],
       (err, result) => {
         if (err){
-        console.log(err);
-        res.send({message:"Product addition unsuccessful, an error occured"})
+        res.send({message:"unsuccessful"})
+
         }
-        res.send({message:"Product added successfully"})
-      }
-  );
-
-}
-
-
-);
-
-
-app.post("/removeprod", (req, res) => {
-
-  const product_id=req.body.prodid
-  const update_key=0
-  const active_bit=0
-
-    db.query(
-        "UPDATE products SET update_key=?, active_bit=? WHERE product_id=?",
-        [update_key, active_bit, product_id],
-        (err, result) => {
-          if (err){
-          console.log(err);
-          res.send({message:"Product removal unsuccessful, an error occured"})
-          }
-          res.send({message:"Product removed successfully"})
-        }
-    );
-    db.query(
-      "UPDATE inventory SET update_key=?, active_bit=? WHERE product_id=?",
-      [update_key, active_bit, product_id],
-      (err, result) => {
-        if (err){
-        console.log(err);
-        res.send({message:"Product removal unsuccessful, an error occured"})
-        }
-        res.send({message:"Product removed successfully"})
+        res.send({message:"successfully entered"})
       }
     );
 
@@ -340,7 +331,7 @@ app.post("/checkout", (req, res) => {
 });
 
 app.get('/stock', (req, res) => {
-  db.query("SELECT product_id, quantity FROM inventory;", (err, results, fields) => {
+  db.query("SELECT product_id,quantity , FROM inventory where quantity<5;", (err, results, fields) => {
     if(err) throw err;
     res.send(results);
   });
@@ -391,4 +382,14 @@ app.post("/cart_gallery", (req, res) => {
 
 app.listen(3002, () => {
   console.log("running server");
+});
+
+app.post("/homepage", (req, res) => {
+  db.query("select product_image from products", (err, result) => {
+    if (err) {
+      console.log({ message: "kdjlfakjkljaklfj" });
+    }
+    console.log(result);
+    res.send({ result});
+  });
 });

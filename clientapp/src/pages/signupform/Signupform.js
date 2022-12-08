@@ -20,7 +20,7 @@ const Signupform = () => {
   }
 
   const forgotpassword=async(e)=>{
-
+      navigate('/forgotpassword')
     
   }
 
@@ -33,11 +33,14 @@ const Signupform = () => {
   }).then(function (response){ 
     if (response.data.message) {
       setLoginStatus(response.data.message);
+      if (response.data.message=="Welcome customer"){
+        navigate('/gallery')
+      }
     } else {
       setLoginStatus(response.data[0].username);
+      navigate('/gallery')
     }
   })//calls post method API registration
-
   }
 
   const handleloginadmin=async (e)=>{
@@ -49,8 +52,6 @@ const Signupform = () => {
     }).then(function (response){ 
       if (response.data.message) {
         setLoginStatus(response.data.message);
-        navigate('/admin')
-        
       } else {
         setLoginStatus(response.data[0].username);
       }
@@ -58,13 +59,13 @@ const Signupform = () => {
 
   }
 
-  useEffect(() => {
-    axios.get("http://localhost:3002/login").then((response) => { //display current status
-      if (response.data.loggedIn == true) {
-        setLoginStatus(response.data.user[0].username);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("http://localhost:3002/login").then((response) => { //display current status
+  //     if (response.data.loggedIn == true) {
+  //       setLoginStatus(response.data.user[0].username);
+  //     }
+  //   });
+  // }, []);
 
   return (
     <div>
