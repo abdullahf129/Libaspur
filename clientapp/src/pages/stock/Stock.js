@@ -32,7 +32,7 @@ const Stock = () => {
             setsales(response.data.user[0].message);
         });
         }, []);
-        
+
 
 
 
@@ -41,10 +41,10 @@ const Stock = () => {
   return (
     <>
      
-      <MDBCard className='sales'>
+      <MDBCard className='stock'>
         <MDBCardBody>
-          <MDBCardTitle>See Total Sales</MDBCardTitle>
-          <MDBCardText>Check out the total sales.</MDBCardText>
+          <MDBCardTitle>See Stock which is going to end</MDBCardTitle>
+          <MDBCardText>Check Stock levels.</MDBCardText>
           {/* <MDBBtn className="mb-0 px-5" size='lg' onClick={sales}>Check Sales</MDBBtn> */}
         </MDBCardBody>
       </MDBCard>

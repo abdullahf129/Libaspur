@@ -339,7 +339,7 @@ app.post("/checkout", (req, res) => {
 });
 
 app.get('/stock', (req, res) => {
-  db.query("SELECT product_id, quantity FROM inventory;", (err, results, fields) => {
+  db.query("SELECT product_id,quantity , FROM inventory where quantity<5;", (err, results, fields) => {
     if(err) throw err;
     res.send(results);
   });
