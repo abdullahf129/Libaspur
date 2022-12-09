@@ -53,7 +53,7 @@ const Gallery = () => {
 
   // function fetchData() {
   //   const fetchData = async () => {
-  //     const resp = await axios.post("http://localhost:3000/gallery");
+  //     const resp = await axios.post("http://localhost:3002/gallery");
   //     console.log(resp);
   //     const { data } = resp;
   //     const { result } = data;
@@ -72,7 +72,7 @@ const Gallery = () => {
   function fetchSearch() {
     const fetchSearch = async () => {
       // e.preventDefault();
-      const resp = await axios.post("http://localhost:3000/search", {
+      const resp = await axios.post("http://localhost:3002/search", {
         searchData: searchData,
       });
       console.log("output: ", resp);
@@ -95,7 +95,7 @@ const Gallery = () => {
   }
   function returnToGallery() {
     const fetchData = async () => {
-      const resp = await axios.post("http://localhost:3000/gallery");
+      const resp = await axios.post("http://localhost:3002/gallery");
       var imageArr = {};
       for (var i = 0; i < resp["data"].length; i++) {
         // imageArr.push(resp["data"][i]["product_image"]);
@@ -116,7 +116,7 @@ const Gallery = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resp = await axios.post("http://localhost:3000/gallery");
+      const resp = await axios.post("http://localhost:3002/gallery");
       var imageArr = {};
       for (var i = 0; i < resp["data"].length; i++) {
         // imageArr.push(resp["data"][i]["product_image"]);

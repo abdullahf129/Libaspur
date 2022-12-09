@@ -192,7 +192,7 @@ app.post("/addprod", (req, res) => {
   const active_bit = 1;
 
   db.query(
-    "INSERT INTO products (product_id, product_name , price , product_image ,category,update_key ,active_bit) VALUES (?,?,?,?,?,?,?)",
+    "INSERT INTO product (product_id, product_name , price , product_image ,category,update_key ,active_bit) VALUES (?,?,?,?,?,?,?)",
     [
       product_id,
       productname,
@@ -209,6 +209,7 @@ app.post("/addprod", (req, res) => {
           message: "Product addition unsuccessful, an error occured",
         });
       }
+  
       res.send({ message: "Product added successfully" });
     }
   );
@@ -222,7 +223,7 @@ app.post("/addprod", (req, res) => {
           message: "Product addition unsuccessful, an error occured",
         });
       }
-      res.send({ message: "Product added successfully" });
+      //res.send({ message: "Product added successfully" });
     }
   );
 });
@@ -247,6 +248,7 @@ app.post("/removeprod", (req, res) => {
 
 
 app.post("/modprod", (req, res) => {
+  console.log('In mod prod')
   const productname = req.body.prodname;
   const price = req.body.prodprice;
   const stock = req.body.prodstock;
@@ -257,7 +259,7 @@ app.post("/modprod", (req, res) => {
   const active_bit = 1;
 
   db.query(
-    "UPDATE products SET product_name=? , price=? , product_image=? ,category=?,update_key=? ,active_bit=? WHERE product_id=?",
+    "UPDATE product SET product_name=? , price=? , product_image=? ,category=?,update_key=? ,active_bit=? WHERE product_id=?",
     [
       productname,
       price,
@@ -268,16 +270,19 @@ app.post("/modprod", (req, res) => {
       product_id,
     ],
     (err, result) => {
+      
       if (err) {
+        console.log('hello2')
         console.log(err);
         res.send({
           message: "Product Modification unsuccessful, an error occured",
         });
       }
-      res.send({ message: "Product modified successfully" });
+      //res.send({ message: "Product modified successfully" });
     }
   );
   db.query(
+    
     "UPDATE inventory SET quantity=?,category=?,update_key=?,active_bit=? WHERE product_id=?",
     [stock, productcategory, update_key, active_bit, product_id],
     (err, result) => {
@@ -287,13 +292,13 @@ app.post("/modprod", (req, res) => {
           message: "Product modification unsuccessful, an error occured",
         });
       }
-      res.send({ message: "Product modified successfully" });
+      //res.send({ message: "Product modified successfully" });
     }
   );
 });
 
 app.post("/homepage", (req, res) => {
-  db.query("select product_image from products where active_bit=1", (err, result) => {
+  db.query("select product_image from product where active_bit=1", (err, result) => {
     if (err) {
       console.log(err);
     }
