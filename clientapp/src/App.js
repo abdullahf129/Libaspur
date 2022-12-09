@@ -58,7 +58,7 @@ function App() {
           <Route path="/stock" element={<Stock />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/sales" element={<Sales/>} />
-          <Route path="/observe" element={<Observe/>} />
+          <Route path="/observestock" element={<Observe/>} />
 
           {/* <Route path="/useState" element={<useState/>} /> */}
         </Routes>
