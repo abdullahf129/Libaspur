@@ -23,7 +23,7 @@ const Observe = () => {
 
     const ob_stock=async (e)=>{
         e.preventDefault(); // doesnt allow submission when field is empty
-        axios.post('http://localhost:3002/observe_stock',{  // remove product
+        axios.post('http://localhost:3002/observestock',{  
         prodid: prodid
     }).then(function (response){ 
         console.log(response);

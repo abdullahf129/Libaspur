@@ -42,6 +42,11 @@ const Admin_pg = () => {
     navigate('/modprod')
   }
 
+  const observe = async (e) => {
+    navigate('/observestock')
+  }
+
+
 
 
 
@@ -88,6 +93,15 @@ const Admin_pg = () => {
         </MDBCardBody>
       </MDBCard>
       <br />
+      <MDBCard className='ob_stock'>
+        <MDBCardBody>
+          <MDBCardTitle>Observe Stock Levels for specific item</MDBCardTitle>
+          <MDBCardText>Check if some item is going to be out of stock.</MDBCardText>
+          <MDBBtn className="mb-0 px-5" size='lg' onClick={observe}>Check Stock </MDBBtn>
+        </MDBCardBody>
+      </MDBCard>
+      <br />
+
       <MDBCard className='modify'>
         <MDBCardBody>
           <MDBCardTitle>Modify a product</MDBCardTitle>

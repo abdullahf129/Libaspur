@@ -16,6 +16,7 @@ import Addcat from "./pages/addcat/Addcat";
 import Stock from "./pages/stock/Stock";
 import Sales from './pages/sales/Sales';
 import Cart from "./pages/Cart/Shopping_cart";
+import Observe from "./pages/observe_stock/Observe_stock";
 
 // import Admin from './pages/admin/Admin'
 // import Addprod from './pages/addproduct/Addprod'
@@ -57,6 +58,7 @@ function App() {
           <Route path="/stock" element={<Stock />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/sales" element={<Sales/>} />
+          <Route path="/observe" element={<Observe/>} />
 
           {/* <Route path="/useState" element={<useState/>} /> */}
         </Routes>
