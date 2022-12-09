@@ -19,7 +19,8 @@ const Signupform = () => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
 
-  const [loginStatus, setLoginStatus] = useState("");
+  const [loginStatuscust, setLoginStatuscust] = useState("");
+  const [loginStatusadmin, setLoginStatusadmin] = useState("");
 
   const newregister = async (e) => {
     navigate("/register");
@@ -41,13 +42,12 @@ const Signupform = () => {
         console.log(response);
 
         if (response.data.message) {
-          setLoginStatus(response.data.message);
+          setLoginStatuscust(response.data.message);
           if (response.data.message == "Welcome customer") {
             navigate("/gallery");
           }
         } else {
-          setLoginStatus(response.data[0].username);
-          navigate("/gallery");
+          setLoginStatuscust(response.data[0].username);
         }
       }); //calls post method API registration
   };
@@ -60,9 +60,12 @@ const Signupform = () => {
 
     }).then(function (response){ 
       if (response.data.message) {
-        setLoginStatus(response.data.message);
+        setLoginStatusadmin(response.data.message);
+        if (response.data.message == "Welcome Admin") {
+          navigate("/admin");
+        }
       } else {
-        setLoginStatus(response.data[0].username);
+        setLoginStatusadmin(response.data[0].username);
       }
     })//calls post method API registration
 
@@ -158,10 +161,13 @@ const Signupform = () => {
             </div>
 
             <div className="text-center text-md-start mt-4 pt-2">
-              <h1>{loginStatus}</h1>
+              <h1>Admin: {loginStatusadmin}</h1>
+              <h1>Customer: {loginStatuscust}</h1>
             </div>
           </MDBCol>
         </MDBRow>
+
+        
 
         <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
           <div className="text-white mb-3 mb-md-0">
