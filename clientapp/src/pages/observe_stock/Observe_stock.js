@@ -14,7 +14,7 @@ import {useNavigate} from "react-router-dom"
 const Observe = () => {
 
 
-    const [stock, setstock] = useState("");
+    const [stock, setstock] = useState([]);
 
     const navigate = useNavigate();
 
@@ -29,7 +29,9 @@ const Observe = () => {
         axios.post('http://localhost:3002/observestock',{  
         prodid: prodid
     }).then(function (response){ 
-        console.log(response);
+        console.log('upper')
+        console.log(response.data.result[0].quantity);
+        setstock(response.data.result[0].quantity);
     })//calls post method API registration
 
     }
