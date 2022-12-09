@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-import React, { useState /*, useEffect*/ } from "react";
-import Images from "./images";
-=======
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +12,6 @@ import {
 } from "react-router-dom";
 
 // import Images from "./images";
->>>>>>> Stashed changes
 const mystyle = {
   color: "white",
   textAlign: "center",
@@ -27,38 +22,6 @@ const mystyle = {
 
 // https://images.pexels.com/photos/35967/mini-cooper-auto-model-vehicle.jpg?cs=srgb&dl=pexels-pixabay-35967.jpg&fm=jpg
 
-<<<<<<< Updated upstream
-// function fetchImages(){
-
-//     //get images from server as a json array
-//     setImages(Images);
-// }
-
-export default function gallery() {
-  //   const [images, setImages] = useState([]);
-
-  //   useEffect(() => {
-  //     console.log("useEffect");
-
-  //   }, []);
-
-  const [selectedImg, setSelectedImg] = useState(Images[0]);
-  return (
-    <div className="App">
-      <h1 style={mystyle}>Gallery</h1>
-      <h2 style={mystyle}>Male Kurtas</h2>
-
-      <div className="container">
-        {/* <img src={selectedImg} alt="Selected" className="selected" /> */}
-        <div className="imgContainer">
-          {Images.map((img, index) => (
-            <img
-              style={{ border: selectedImg === img ? "4px solid purple" : "" }}
-              key={index}
-              src={img}
-              alt="dog"
-              onClick={() => setSelectedImg(img)}
-=======
 const Gallery = () => {
   // export default function Gallery() {
   const [Images, setImages] = useState([]);
@@ -176,7 +139,6 @@ const Gallery = () => {
               // value={selectedImg}
               // // alt="dog"
               // onClick={() => setSelectedImg(img)}
->>>>>>> Stashed changes
             />
           ))}
         </div>
@@ -186,34 +148,8 @@ const Gallery = () => {
 
       <br></br>
       <br></br>
-<<<<<<< Updated upstream
-
-      <h2 style={mystyle}>Female Kurtas</h2>
-      <br></br>
-      <br></br>
-      <div className="container">
-        {/* <img src={selectedImg} alt="Selected" className="selected" /> */}
-        <div className="imgContainer">
-          {Images.map((img, index) => (
-            <img
-              style={{ border: selectedImg === img ? "4px solid purple" : "" }}
-              key={index}
-              src={img}
-              alt="dog"
-              onClick={() => setSelectedImg(img)}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// export default gallery;
-=======
     </div>
   );
 };
 
 export default Gallery;
->>>>>>> Stashed changes

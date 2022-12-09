@@ -12,7 +12,7 @@ import Admin from "./pages/admin/Admin";
 import Addprod from "./pages/addproduct/Addprod";
 import Removeprod from "./pages/removeprod/Removeprod";
 import Modprod from "./pages/modifyprod/Modprod";
-import Addcat from "./pages/admin/addcat/Addcat";
+import Addcat from "./pages/addcat/Addcat";
 import Stock from "./pages/stock/Stock";
 // import Sales from './pages/admin/sales/Sales'
 import Cart from "./pages/Cart/Shopping_cart";
