@@ -435,7 +435,7 @@ app.get('/stock', (req, res) => {
 });
 
 
-app.get('/observestock', (req, res) => {
+app.post('/observestock', (req, res) => {
   console.log('coming here')
   const product_id = req.body.prodid;
 
@@ -456,10 +456,6 @@ app.get('/observestock', (req, res) => {
     }
   )
 });
-
-
-
-
 
 
 
