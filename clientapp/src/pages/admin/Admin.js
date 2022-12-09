@@ -31,7 +31,7 @@ const Admin_pg = () => {
   }
 
   const sales=async (e)=>{
-    navigate('/register')
+    navigate('/sales')
   }
 
   const remprod=async (e)=>{

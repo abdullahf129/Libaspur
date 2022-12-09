@@ -18,8 +18,7 @@ const Stock = () => {
 
   const navigate = useNavigate();
 
-  const [sales, setsales] = useState("");
-  const [another,setanother]=useState("");
+  const [sales, setsales] = useState([]);
   // const stock=async (e)=>{
   //   axios.post('http://localhost:3002/stock',{  // add post to address)
   //   }).then(function (response){ 
@@ -34,12 +33,12 @@ const Stock = () => {
     useEffect(() => {
         axios.get("http://localhost:3002/stock").then((response) => { //display current status
         console.log('here')
-        console.log(response.data.result[0])    
-        setsales(response.data.result[0].product_id);
-        setanother(response.data.result[0].quantity);
+        console.log(response.data.result)    
+  
+        setsales(response.data.result);
         //setsales(response.data.result[1].product_id);
 
-        });
+        })
         }, []);
 
 
@@ -55,10 +54,9 @@ const Stock = () => {
           <MDBCardTitle>See Stock which is going to end</MDBCardTitle>
           <MDBCardText>Check Stock levels.</MDBCardText>
           <div className='text-center text-md-start mt-4 pt-2'>
-          <MDBCardText>Product ID.</MDBCardText>
-           <h1>{sales}</h1>
-           <MDBCardText>Quantity remaining</MDBCardText>
-           <h1>{another}</h1>
+          {sales.map((user) => (
+          <div className='text-center text-md-start mt-4 pt-2'>Product ID={user.product_id} ,Quantity remaining={user.quantity}</div>
+          ))}
           </div>
           {/* <MDBBtn className="mb-0 px-5" size='lg' onClick={sales}>Check Sales</MDBBtn> */}
         </MDBCardBody>

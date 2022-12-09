@@ -37,7 +37,7 @@ app.use(
 const db = mysql.createConnection({
   user: "root",
   host: "localhost",
-  password: "server",
+  password: "Col61513",
   database: "grp16_website",
 });
 
@@ -425,8 +425,8 @@ app.get('/stock', (req, res) => {
   )
 });
 
-app.get('sales', (req, res) => {  //sales report
-  db.query("SELECT date,sum(amount) FROM sales group by date;",
+app.get('/sales', (req, res) => {  //sales report
+  db.query("SELECT date,sum(amount)as total FROM sales group by date;",
     (err, result) => {
       if (err) {
         console.log('no')

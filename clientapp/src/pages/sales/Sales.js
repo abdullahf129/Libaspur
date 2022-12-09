@@ -18,8 +18,7 @@ const Sales = () => {
 
   const navigate = useNavigate();
 
-  const [sales, setdate] = useState("");
-  const [amount,setamountr]=useState("");
+  const [sales, setdate] = useState([]);
   // const stock=async (e)=>{
   //   axios.post('http://localhost:3002/stock',{  // add post to address)
   //   }).then(function (response){ 
@@ -35,8 +34,7 @@ const Sales = () => {
         axios.get("http://localhost:3002/sales").then((response) => { //display current status
         console.log('here')
         console.log(response.data.result[0])    
-        setdate(response.data.result[0].date);
-        setamount(response.data.result[0].amount);
+        setdate(response.data.result);
         //setdate(response.data.result[1].date);
 
         });
@@ -55,10 +53,9 @@ const Sales = () => {
           <MDBCardTitle>Sales Report</MDBCardTitle>
           <MDBCardText>Check the daily sales below</MDBCardText>
           <div className='text-center text-md-start mt-4 pt-2'>
-          <MDBCardText>Date</MDBCardText>
-           <h1>{sales}</h1>
-           <MDBCardText>Amount Sold</MDBCardText>
-           <h1>{another}</h1>
+          {sales.map((user) => (
+          <div className='text-center text-md-start mt-4 pt-2'>Date={user.date} , Amount={user.total}</div>
+          ))}
           </div>
           {/* <MDBBtn className="mb-0 px-5" size='lg' onClick={sales}>Check Sales</MDBBtn> */}
         </MDBCardBody>

@@ -14,7 +14,7 @@ import Removeprod from "./pages/removeprod/Removeprod";
 import Modprod from "./pages/modifyprod/Modprod";
 import Addcat from "./pages/addcat/Addcat";
 import Stock from "./pages/stock/Stock";
-// import Sales from './pages/admin/sales/Sales'
+import Sales from './pages/sales/Sales';
 import Cart from "./pages/Cart/Shopping_cart";
 
 // import Admin from './pages/admin/Admin'
@@ -29,6 +29,18 @@ import Cart from "./pages/Cart/Shopping_cart";
 function App() {
   return (
     <div>
+    <BrowserRouter> 
+    <Routes>
+    <Route path="/" element={<Signupform/>} />
+    <Route path="/register" element={<Registerform />} />
+    <Route path="/gallery" element={<Gallery/>} />
+    <Route path="/forgotpassword" element={<Forgotpassword/>} />
+    <Route path="/homepage" element={<Gallery/>} />
+    {/* <Route path="/useState" element={<useState/>} /> */}
+    </Routes>
+    </BrowserRouter>
+    
+    {/* <Signupform></Signupform> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Signupform />} />
@@ -44,7 +56,7 @@ function App() {
           <Route path="/addcat" element={<Addcat />} />
           <Route path="/stock" element={<Stock />} />
           <Route path="/cart" element={<Cart />} />
-          {/* <Route path="/sales" element={<Admin/>} /> */}
+          <Route path="/sales" element={<Sales/>} />
 
           {/* <Route path="/useState" element={<useState/>} /> */}
         </Routes>
