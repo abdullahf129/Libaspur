@@ -27,7 +27,7 @@ const Admin_pg = () => {
   }
 
   const stock=async (e)=>{
-    navigate('/register')
+    navigate('/stock')
   }
 
   const sales=async (e)=>{
@@ -60,7 +60,7 @@ const Admin_pg = () => {
         <MDBCardBody>
           <MDBCardTitle>Add a product category </MDBCardTitle>
           <MDBCardText>Add a product category.</MDBCardText>
-          <MDBBtn className="mb-0 px-5" size='lg' onClick={addprod}>Add Product Category </MDBBtn>
+          <MDBBtn className="mb-0 px-5" size='lg' onClick={addcat}>Add Product Category </MDBBtn>
         </MDBCardBody>
       </MDBCard>
       <br />

@@ -464,20 +464,30 @@ app.post("/checkout", (req, res) => {
           }
           result.active_bit = 0;
         }
-      );
-    }
-  );
+        
+      );  
+      });   
+    
 });
 
-app.get("/stock", (req, res) => {
-  db.query(
-    "SELECT product_id,quantity , FROM inventory where quantity<5;",
-    (err, results, fields) => {
-      if (err) throw err;
-      res.send(results);
+app.get('/stock', (req, res) => {
+  console.log('coming here')
+  db.query("SELECT product_id,quantity FROM inventory where quantity<5;",
+    (err, result) => {
+      if (err) {
+        console.log('no')
+        res.send({ message: err });
+      }
+      if (result.length > 0) {
+        console.log('yes')
+          res.send({result})
+          req.session.user = result;
+          console.log(result);
+      }
     }
-  );
+  )
 });
+
 
 //Add to cart function
 app.post("/addtocart", (req, res) => {

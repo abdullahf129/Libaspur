@@ -54,21 +54,19 @@ const Signupform = () => {
 
   const handleloginadmin = async (e) => {
     e.preventDefault(); // doesnt allow submission when field is empty
-    axios
-      .post("http://localhost:3002/loginadmin", {
-        // add post to address  //admin login
-        username: username,
-        password: password,
-      })
-      .then(function(response) {
-        if (response.data.message) {
-          setLoginStatus(response.data.message);
-        } else {
-          setLoginStatus(response.data[0].username); ///////////////////////////
-        }
-      }); //calls post method API registration
-    navigate("/gallery"); //naviagagting to gallery temporarily   //////////////////////////
-  };
+    axios.post('http://localhost:3002/loginadmin',{  // add post to address  //admin login
+    username: username,
+    password: password
+
+    }).then(function (response){ 
+      if (response.data.message) {
+        setLoginStatus(response.data.message);
+      } else {
+        setLoginStatus(response.data[0].username);
+      }
+    })//calls post method API registration
+
+  }
 
   // useEffect(() => {
   //   axios.get("http://localhost:3002/login").then((response) => { //display current status
