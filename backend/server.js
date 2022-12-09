@@ -223,7 +223,7 @@ app.post("/addprod", (req, res) => {
           message: "Product addition unsuccessful, an error occured",
         });
       }
-      //res.send({ message: "Product added successfully" });
+      // res.send({ message: "Product added successfully" });
     }
   );
 });
