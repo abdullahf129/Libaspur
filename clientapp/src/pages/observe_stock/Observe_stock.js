@@ -32,6 +32,11 @@ const Observe = () => {
         console.log(response);
     })//calls post method API registration
 
+    }
+
+    
+
+
     useEffect(() => {
         axios.get("http://localhost:3002/observe_sales").then((response) => { //display current status
         console.log('here')
@@ -42,9 +47,10 @@ const Observe = () => {
 
         });
         }, []);
+    
 
 
-    }
+    
 
 
     return (
@@ -65,15 +71,6 @@ const Observe = () => {
         </MDBContainer>
 
         
-
-
-    
-
-
-
-
-
-
 
 
 
