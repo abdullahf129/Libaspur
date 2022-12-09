@@ -233,28 +233,6 @@ app.post("/removeprod", (req, res) => {
   const active_bit = 0;
 
   db.query(
-    "UPDATE products SET update_key=?, active_bit=? WHERE product_id=?",
-    [update_key, active_bit, product_id],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        res.send({ message: "Product removal unsuccessful, an error occured" });
-app.post("/insertreview", (req, res) => {
-  const username = req.body.username;
-  const sentence = req.body.sentence;
-
-  db.query(
-    "INSERT INTO review (user_id, statement) VALUES (?,?)",
-    [username, sentence],
-    (err, result) => {
-      if (err) {
-        res.send({ message: "unsuccessful" });
-      }
-<<<<<<< Updated upstream
-      res.send({ message: "Product removed successfully" });
-    }
-  );
-  db.query(
     "UPDATE inventory SET update_key=?, active_bit=? WHERE product_id=?",
     [update_key, active_bit, product_id],
     (err, result) => {
@@ -263,12 +241,10 @@ app.post("/insertreview", (req, res) => {
         res.send({ message: "Product removal unsuccessful, an error occured" });
       }
       res.send({ message: "Product removed successfully" });
-=======
-      res.send({ message: "successfully entered" });
->>>>>>> Stashed changes
     }
   );
 });
+
 
 app.post("/modprod", (req, res) => {
   const productname = req.body.prodname;
@@ -279,7 +255,6 @@ app.post("/modprod", (req, res) => {
   const productimage = req.body.prodimg;
   const update_key = 1;
   const active_bit = 1;
-<<<<<<< Updated upstream
 
   db.query(
     "UPDATE products SET product_name=? , price=? , product_image=? ,category=?,update_key=? ,active_bit=? WHERE product_id=?",
@@ -318,50 +293,12 @@ app.post("/modprod", (req, res) => {
 });
 
 app.post("/homepage", (req, res) => {
-  db.query("select product_image from products", (err, result) => {
+  db.query("select product_image from products where active_bit=1", (err, result) => {
     if (err) {
       console.log(err);
     }
     res.send(result);
   });
-});
-=======
->>>>>>> Stashed changes
-
-  db.query(
-    "UPDATE products SET product_name=? , price=? , product_image=? ,category=?,update_key=? ,active_bit=? WHERE product_id=?",
-    [
-      productname,
-      price,
-      productimage,
-      productcategory,
-      update_key,
-      active_bit,
-      product_id,
-    ],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        res.send({
-          message: "Product Modification unsuccessful, an error occured",
-        });
-      }
-      res.send({ message: "Product modified successfully" });
-    }
-  );
-  db.query(
-    "UPDATE inventory SET quantity=?,category=?,update_key=?,active_bit=? WHERE product_id=?",
-    [stock, productcategory, update_key, active_bit, product_id],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        res.send({
-          message: "Product modification unsuccessful, an error occured",
-        });
-      }
-      res.send({ message: "Product modified successfully" });
-    }
-  );
 });
 
 app.post("/addcat", (req, res) => {
@@ -519,7 +456,7 @@ app.post("/addtocart", (req, res) => {
 //Send cart data to cart page
 app.post("/cart_gallery", (req, res) => {
   try {
-    db.query("select product_id from cart", (err, result) => {
+    db.query("select product_id from cart where active_bit=1", (err, result) => {
       if (err) {
         console.log({ err: err });
       }
@@ -536,13 +473,11 @@ app.post("/cart_gallery", (req, res) => {
   }
 });
 
-app.listen(3002, () => {
-  console.log("running server");
-});
+
 
 app.post("/gallery", (req, res) => {
   try {
-    db.query("select product_image from product", (err, result) => {
+    db.query("select product_image from product where active_bit=1", (err, result) => {
       if (err) {
         console.log({ err: err });
       }
@@ -566,7 +501,7 @@ app.post("/search", (req, res) => {
   // res.send("Hello");
   // const search = req.body.search;
   db.query(
-    "SELECT * FROM product WHERE category=?",
+    "SELECT * FROM product WHERE category=? and active_bit=1",
     [searchData],
     (err, result) => {
       if (err) {
@@ -579,4 +514,10 @@ app.post("/search", (req, res) => {
       res.send({ result: arr });
     }
   );
+});
+
+
+
+app.listen(3002, () => {
+  console.log("running server");
 });

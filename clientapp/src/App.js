@@ -5,8 +5,8 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Signupform from "./pages/signupform/Signupform";
 import Registerform from "./pages/registerform/Registerform";
-import Gallery from "./pages/gallery/gallery/Gallery";
-import Images from "./pages/gallery/gallery/images";
+import Gallery from "./pages/gallery//Gallery";
+import Images from "./pages/gallery/Images";
 import Forgotpassword from "./pages/forgotpassword/Forgotpassword";
 import Admin from "./pages/admin/Admin";
 import Addprod from "./pages/addproduct/Addprod";
@@ -15,18 +15,16 @@ import Modprod from "./pages/modifyprod/Modprod";
 import Addcat from "./pages/admin/addcat/Addcat";
 import Stock from "./pages/stock/Stock";
 // import Sales from './pages/admin/sales/Sales'
-import Cart from "./pages/Cart/Shopping_cart";<<<<<<< Updated upstream
+import Cart from "./pages/Cart/Shopping_cart";
 
-=======
-import Admin from './pages/admin/Admin'
-import Addprod from './pages/addproduct/Addprod'
-import Removeprod from './pages/removeprod/Removeprod'
-import Modprod from './pages/modifyprod/Modprod'
-import Addcat from './pages/addcat/Addcat'
-import Stock from './pages/stock/Stock'
+// import Admin from './pages/admin/Admin'
+// import Addprod from './pages/addproduct/Addprod'
+// import Removeprod from './pages/removeprod/Removeprod'
+// import Modprod from './pages/modifyprod/Modprod'
+// import Addcat from './pages/addcat/Addcat'
+// import Stock from './pages/stock/Stock'
 // import Sales from './pages/admin/sales/Sales'
-import Cart from './pages/Cart/Shopping_cart'
->>>>>>> Stashed changes
+// import Cart from './pages/Cart/Shopping_cart'
 
 function App() {
   return (
