@@ -477,18 +477,17 @@ app.post("/cart_gallery", (req, res) => {
 
 app.post("/gallery", (req, res) => {
   try {
-    db.query("select product_image from product where active_bit=1", (err, result) => {
-      if (err) {
-        console.log({ err: err });
-      }
-      // console.log(result);
-      var arr = [];
-      for (var i = 0; i < result.length; i++) {
-        arr.push(result[i].product_image);
-      }
+    db.query(
+      "select product_image,product_name,price from product where active_bit=1",
+      (err, result) => {
+        if (err) {
+          console.log({ err: err });
+        }
+        // console.log(result);
 
-      res.send({ result: arr });
-    });
+        res.send(result);
+      }
+    );
   } catch (err) {
     console.log(err);
     res.send(err);
@@ -501,18 +500,15 @@ app.post("/search", (req, res) => {
   // res.send("Hello");
   // const search = req.body.search;
   db.query(
-    "SELECT * FROM product WHERE category=? and active_bit=1",
+    "SELECT product_image,product_name,price FROM product WHERE category=? and active_bit=1",
     [searchData],
     (err, result) => {
       if (err) {
         console.log(err);
       }
-      var arr = [];
-      for (var i = 0; i < result.length; i++) {
-        arr.push(result[i].product_image);
-      }
-      res.send({ result: arr });
-    }
+
+      res.send(result);
+   }
   );
 });
 

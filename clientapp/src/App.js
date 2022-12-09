@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Signupform from "./pages/signupform/Signupform";
 import Registerform from "./pages/registerform/Registerform";
 import Gallery from "./pages/gallery//Gallery";
-import Images from "./pages/gallery/Images";
+// import Images from "./pages/gallery/Images";
 import Forgotpassword from "./pages/forgotpassword/Forgotpassword";
 import Admin from "./pages/admin/Admin";
 import Addprod from "./pages/addproduct/Addprod";
@@ -35,7 +35,7 @@ function App() {
           <Route path="/register" element={<Registerform />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/forgotpassword" element={<Forgotpassword />} />
-          <Route path="/images" element={<Images />} />
+          {/* <Route path="/images" element={<Images />} /> */}
           <Route path="/homepage" element={<Gallery />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/addprod" element={<Addprod />} />
