@@ -347,32 +347,24 @@ app.post("/checkout", (req, res) => {
   // const active_bit=1
 
   //appending order history
-
+  const { prod_id} = req.body.product_id;
   db.query(
-    `SELECT * FROM shopping_cart WHERE shoppingcart_id=${shopping_cart}`,
+    `SELECT * FROM shopping_cart WHERE product_id=?`,
+    [prod_id], 
     (err, result) => {
-      console.log(result);
+      
+    console.log(result)
 
-      db.query(
-        "INSERT INTO order_history (cust_id, shoppingcart_id, product_id, order_id, quantity, NOW(), total_cost,update_key, active_bit) VALUES (?,?,?,?,?,?,?,?)",
-        [
-          result.cust_id,
-          result.shoppingcart_id,
-          result.product_id,
-          orderid,
-          result.quantity,
-          result.data,
-          result.total_cost,
-          result.update_key,
-          result.active_bit,
-        ],
-        (err, result) => {
-          if (err) {
-            console.log(err);
-            res.send({ message: "Order could not be placed" });
-          }
-          res.send({ message: "Order has been shipped" });
+    db.query(
+      "INSERT INTO order_history (cust_id, shoppingcart_id, product_id, order_id, quantity, NOW(), total_cost,update_key, active_bit) VALUES (?,?,?,?,?,?,?,?)",
+      [result.cust_id, result.shoppingcart_id, result.product_id, orderid, result.quantity, result.data, result.total_cost, result.update_key, result.active_bit],
+      (err, result) => {
+        if (err){
+        console.log(err);
+        res.send({message:"Order could not be placed"})
+
         }
+      }
       );
 
       //subtracting from inventory
@@ -452,30 +444,46 @@ app.get('/sales', (req, res) => {  //sales report
 
 //Add to cart function
 app.post("/addtocart", (req, res) => {
+  const { product_name } = req.body.product_name;
+  const { price } = req.body.price;
   db.query(
-    `SELECT * FROM inventory WHERE product_id = $(inventory)`,
+    "INSERT INTO shopping_cart ( shoppingcart_id, cust_id, product_id, quantity,total_cost,update_key,active_bit) VALUES (?,?,?,?,?,?,?)",
+    [0, 0, product_name, 1, price, 0, 1],
     (err, result) => {
-      {
-        if (err) {
-          console.log(err);
-        }
+      if (err) {
+        console.log(err);
+        res.send({
+          message: "Product addition unsuccessful, an error occured",
+        });
       }
-      db.query(
-        "INSERT INTO cart (product_id, quantity, customer_id, update_key, active_bit) VALUES (?,?,?,?,?)",
-        [product_id, quantity, customer_id, update_key, active_bit],
-        (err, result) => {
-          if (err) {
-            console.log(err);
-            res.send({
-              message: "Product addition unsuccessful, an error occured",
-            });
-          }
-          res.send({ message: "Product added successfully" });
-        }
-      );
+      res.send({ message: "Product added successfully" });
     }
   );
 });
+
+app.post("/viewcart", (req, res) => {
+  try {
+    db.query(
+      "select price,product_id from shopping_cart",
+      (err, result) => {
+        if (err) {
+          console.log("error in fetching cart items");
+          console.log({ err: err });
+        }
+        // console.log(result);
+        console.log("Successfully fetched cart items")
+        res.send(result);
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
+
+
+
+
 
 //Send cart data to cart page
 app.post("/cart_gallery", (req, res) => {
