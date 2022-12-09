@@ -241,7 +241,19 @@ app.post("/removeprod", (req, res) => {
         console.log(err);
         res.send({ message: "Product removal unsuccessful, an error occured" });
       }
-      res.send({ message: "Product removed successfully" });
+
+    }
+  );
+
+  db.query(
+    "UPDATE product SET update_key=?, active_bit=? WHERE product_id=?",
+    [update_key, active_bit, product_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send({ message: "Product removal unsuccessful, an error occured" });
+      }
+
     }
   );
 });
@@ -422,6 +434,36 @@ app.get('/stock', (req, res) => {
   )
 });
 
+
+app.get('/observestock', (req, res) => {
+  console.log('coming here')
+  const product_id = req.body.prodid;
+
+
+  db.query("SELECT product_id,quantity FROM inventory where product_id=?;",
+    [product_id],
+    (err, result) => {
+      if (err) {
+        console.log('no')
+        res.send({ message: err });
+      }
+      if (result.length > 0) {
+        // console.log('yes')
+          res.send({result})
+          req.session.user = result;
+          console.log(result);
+      }
+    }
+  )
+});
+
+
+
+
+
+
+
+
 app.get('/sales', (req, res) => {  //sales report
   db.query("SELECT date,sum(amount)as total FROM sales group by date;",
     (err, result) => {
@@ -438,6 +480,9 @@ app.get('/sales', (req, res) => {  //sales report
     }
   )
 });
+
+
+
 
 
 
