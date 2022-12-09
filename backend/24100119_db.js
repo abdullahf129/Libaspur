@@ -51,13 +51,13 @@ var c1 ="create table grp16_website.customer( cust_id varchar(200) Primary Key, 
 var a1= "create table grp16_website.admin( admin_id varchar(200) Primary Key, password varchar(255))"
 var i1= "insert into grp16_website.admin values('abdullah','$2b$10$vyI6pWhW0NtWdvmfDLeIle3o.PiArrFMh/JHmUZk2tEr705fqibaG')"
 var s1= "create table grp16_website.product( product_id varchar(200) Primary Key, product_name varchar(255) not null, price varchar(255) not null, product_image varchar(255),category varchar(255),update_key int,active_bit int,prod_image varchar(255))"
-var inven= "create table grp16_website.inventory( product_id varchar(200) Primary Key, quantity int, category varchar(255),update_key int,active_bit int)"
-var shop= "create table grp16_website.shopping_cart( shoppingcart_id varchar(200) Primary Key,cust_id varchar(200) Primary Key, product_id varchar(255), quantity int,total_cost double ,update_key int,active_bit int)"
-var curennt_order= "create table grp16_website.current_order( cust_id varchar(200) Primary Key, product_id varchar(255),order_id varchar(255) not null AUTO_INCREMENT,order_status varchar(255), quantity int ,update_key int,active_bit int)"
-var order_history="create table grp16_website.order_history( cust_id varchar(200) Primary Key,shoppingcart_id varchar(200), product_id varchar(255),order_id varchar(255), quantity int,data date ,total_cost double ,update_key int,active_bit int)"
+var inven= "create table grp16_website.inventory( product_id varchar(200) Primary Key, quantity int, category varchar(255),update_key int,active_bit int, Foreign Key (product_id) references grp16_website.product(product_id))"
+var shop= "create table grp16_website.shopping_cart( shoppingcart_id varchar(200) Primary Key,cust_id varchar(200) Primary Key, product_id varchar(255), quantity int,total_cost double ,update_key int,active_bit int, Foreign Key (product_id) references grp16_website.product(product_id))"
+var curennt_order= "create table grp16_website.current_order( cust_id varchar(200) Primary Key, product_id varchar(255),order_id varchar(255) not null AUTO_INCREMENT,order_status varchar(255), quantity int ,update_key int,active_bit int, Foreign Key (cust_id) references grp16_website.shopping_cart(cust_id), Foreign Key (product_id) references grp16_website.product(product_id))"
+var order_history="create table grp16_website.order_history( cust_id varchar(200) Primary Key,shoppingcart_id varchar(200), product_id varchar(255),order_id varchar(255), quantity int,data date ,total_cost double ,update_key int,active_bit int, Foreign Key (cust_id) references grp16_website.current_order(cust_id), Foreign Key (product_id) references grp16_website.product(product_id))"
 var password="create table grp16_website.password_reset( cust_id varchar(200) Primary Key, password varchar(255),sec_ques varchar(255),update_key int,active_bit int)"
-var category="create table grp16_website.category(category_name varchar(255) Primary Key,update_key int,active_bit int)"
-var sales = "create table grp16_website.sales(date date Primary Key,amount double,update_key int,active_bit int)"
+var category="create table grp16_website.category(category_name varchar(255) Primary Key,update_key int,active_bit int,Foreign Key (category_name) references grp16_website.product(category))"
+var sales = "create table grp16_website.sales(date date,amount double,update_key int,active_bit int)"
 connectionString.connect( (error)=>
 {
     if(!error)
