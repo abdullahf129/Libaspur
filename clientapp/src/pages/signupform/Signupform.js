@@ -26,6 +26,7 @@ const Signupform = () => {
 
   const handlelogincust=async (e)=>{
     e.preventDefault(); // doesnt allow submission when field is empty
+<<<<<<< Updated upstream
     axios.post('http://localhost:3002/logincustomer',{  // add post to address
     username: username,
     password: password
@@ -42,6 +43,27 @@ const Signupform = () => {
     }
   })//calls post method API registration
   }
+=======
+    axios
+      .post("http://localhost:3002/logincustomer", {
+        // add post to address
+        username: username,
+        password: password,
+      })
+      .then(function(response) {
+        console.log(response);
+
+        if (response.data.message) {
+          setLoginStatus(response.data.message);
+          if (response.data.message == "Welcome customer") {
+            navigate("/gallery");
+          }
+        } else {
+          setLoginStatus(response.data[0].username);
+        }
+      }); //calls post method API registration
+  };
+>>>>>>> Stashed changes
 
   const handleloginadmin=async (e)=>{
     e.preventDefault(); // doesnt allow submission when field is empty
@@ -55,6 +77,9 @@ const Signupform = () => {
           navigate('/admin')
         }
         setLoginStatus(response.data.message);
+        if (response.data.message == "Welcome Admin") {
+          navigate("/admin");
+        }
       } else {
         setLoginStatus(response.data[0].username);
       }

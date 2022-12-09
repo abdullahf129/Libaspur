@@ -170,7 +170,7 @@ app.post("/logincustomer", (req, res) => {
     username,
     (err, result) => {
       if (err) {
-        res.send({ err: err });
+        res.send({ message: err });
       }
 
       if (result.length > 0) {
