@@ -57,6 +57,7 @@ var curennt_order= "create table grp16_website.current_order( cust_id varchar(20
 var order_history="create table grp16_website.order_history( cust_id varchar(200) Primary Key,shoppingcart_id varchar(200), product_id varchar(255),order_id varchar(255), quantity int,data date ,total_cost double ,update_key int,active_bit int)"
 var password="create table grp16_website.password_reset( cust_id varchar(200) Primary Key, password varchar(255),sec_ques varchar(255),update_key int,active_bit int)"
 var category="create table grp16_website.category(category_name varchar(255) Primary Key,update_key int,active_bit int)"
+var sales = "create table grp16_website.sales(date date Primary Key,amount double,update_key int,active_bit int)"
 connectionString.connect( (error)=>
 {
     if(!error)

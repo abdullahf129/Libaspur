@@ -425,6 +425,25 @@ app.get('/stock', (req, res) => {
   )
 });
 
+app.get('sales', (req, res) => {  //sales report
+  db.query("SELECT date,sum(amount) FROM sales group by date;",
+    (err, result) => {
+      if (err) {
+        console.log('no')
+        res.send({ message: err });
+      }
+      if (result.length > 0) {
+        console.log('yes')
+          res.send({result})
+          req.session.user = result;
+          console.log(result);
+      }
+    }
+  )
+});
+
+
+
 
 //Add to cart function
 app.post("/addtocart", (req, res) => {
