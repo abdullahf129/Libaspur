@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /*
 //DO NOT MODIFY ANY PART OF THIS CODE USELESS TOLD TO DO SO.
 */
-/Add you connestion details to the env file/
+/*Add you connestion details to the env file*/
 
 var connectionString = mysql.createConnection({
   host: process.env.host,
@@ -72,15 +72,15 @@ connectionString.connect( (error)=>
                 console.log("Database Created");
                 try{
                     //call create table here using await like done below here.
-                    await createTable(c1)
-                    await createTable(a1)
-                    // await createTable(i1)
-                    // await createTable(s1)
-                    // await createTable(inven)
-                    // await createTable(shop)
-                    // await createTable(curennt_order)
-                    // await createTable(order_history)
-                    // await createTable(password)
+                    // await createTable(c1)
+                    // await createTable(a1)
+                    //await createTable(i1)
+                    await createTable(s1)
+                    await createTable(inven)
+                    await createTable(shop)
+                    await createTable(curennt_order)
+                    await createTable(order_history)
+                    await createTable(password)
                     console.log("All tables created");
                 }
                 catch(err)
