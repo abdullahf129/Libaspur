@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /*
 //DO NOT MODIFY ANY PART OF THIS CODE USELESS TOLD TO DO SO.
 */
-/Add you connestion details to the env file/
+
 
 var connectionString = mysql.createConnection({
   host: process.env.host,
@@ -48,7 +48,7 @@ function createTable(CreateQuerry) {
 
 var c1 = "create table grp16_website.customer( cust_id varchar(200) Primary Key, password varchar(255), email_id varchar (200), name varchar(200), house_adress varchar(255),phone varchar(255),update_key int)";
 
-var a1 = "create table grp16_website.admin( admin_id varchar(200) Primary Key, password varchar(255))"
+var a1 = "create table grp16_website.store_admin( ID varchar(200) Primary Key, password varchar(255))"
 
 var s1 = "create table grp16_website.product( product_id varchar(200) UNIQUE, product_name varchar(255) not null, price varchar(255) not null, product_image varchar(255),category varchar(255) KEY,update_key int,active_bit int)"
 
@@ -67,7 +67,7 @@ var category = "create table grp16_website.category(category_name varchar(255) P
 var sales = "create table grp16_website.sales(date date,amount double,update_key int,active_bit int)"
 
 
-var i1= "insert into grp16_website.admin values('abdullah','$2b$10$vyI6pWhW0NtWdvmfDLeIle3o.PiArrFMh/JHmUZk2tEr705fqibaG')"
+var i1= "insert into grp16_website.store_admin values('abdullah','$2b$10$vyI6pWhW0NtWdvmfDLeIle3o.PiArrFMh/JHmUZk2tEr705fqibaG')"
 var i2= "insert into grp16_website.product values('1','abc','100','https://media.istockphoto.com/id/1180368192/photo/indian-bridegroom-wears-ethnic-or-traditional-cloths.jpg?s=612x612&w=is&k=20&c=OIsuOBbGxODCW-L2eREtWJnGhHaZR9rVUZp2ml433c0=','abcefg','0','1')"
 var i3= "insert into grp16_website.inventory values('1','100','abcefg','0','1')"
 
@@ -87,9 +87,9 @@ connectionString.connect( (error)=>
                 console.log("Database Created");
                 try{
                     //call create table here using await like done below here.
-                    await createTable(c1)
-                    await createTable(a1)
-                    //await createTable(i1)
+                    // await createTable(c1)
+                    // await createTable(a1)
+                    // await createTable(i1)
                     await createTable(s1)
                     await createTable(inven)
                     await createTable(shop)
